@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: drill
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drill
+  template:
+    metadata:
+      labels:
+        app: drill
+    spec:
+      containers:
+        - name: drill
+          image: donnercody/apache_drill:latest
+          env:
+            - name: ZOOKEEPER_HOST
+              value: zk-service
+          ports:
+            - containerPort: 8047
+            - containerPort: 31010
